@@ -1,5 +1,6 @@
 # McCann Birmingham Technical Test
 ##### Barry Hood - 16/09/2017
+---
 
 This project requires NPM and uses Webpack with hot reloading.
 
