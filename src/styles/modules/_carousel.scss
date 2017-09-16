@@ -3,7 +3,6 @@ $SLIDE_HEIGHT_LARGE: 895px;
 $SLIDE_TRANSITION_TIME: 1s;
 
 .carousel {
-
   .wrap {
     position: relative;
     z-index: 2;
@@ -99,7 +98,6 @@ $SLIDE_TRANSITION_TIME: 1s;
       border-radius: 10px;
       background: white;
       border: 3px solid white;
-      //box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 3px 3px;
       transition: all $TRANSITION;
     }
     &--active {
@@ -222,6 +220,14 @@ $SLIDE_TRANSITION_TIME: 1s;
   to change to an alternative transition (such as fade)
 */
 
+.carousel__slide--current,
+.carousel__slide--slide-out,
+.carousel__slide--slide-in,
+.carousel__slide--slide-out-reverse,
+.carousel__slide--slide-in-reverse {
+  display: block;
+}
+
 @keyframes carousel-slide-out {
   0% { transform: translateX(0%);  }
   100% { transform: translateX(-100%); }
@@ -230,11 +236,13 @@ $SLIDE_TRANSITION_TIME: 1s;
   0% { transform: translateX(100%);  }
   100% { transform: translateX(0%); }
 }
-
-.carousel__slide--current,
-.carousel__slide--slide-out,
-.carousel__slide--slide-in {
-  display: block;
+@keyframes carousel-slide-out-reverse {
+  0% { transform: translateX(0%);  }
+  100% { transform: translateX(100%); }
+}
+@keyframes carousel-slide-in-reverse {
+  0% { transform: translateX(-100%);  }
+  100% { transform: translateX(0%); }
 }
 
 .carousel__slide--slide-out {
@@ -245,6 +253,13 @@ $SLIDE_TRANSITION_TIME: 1s;
   animation: carousel-slide-in $SLIDE_TRANSITION_TIME both ease-in-out;
 }
 
+.carousel__slide--slide-out-reverse {
+  animation: carousel-slide-out-reverse $SLIDE_TRANSITION_TIME both ease-in-out;
+}
+
+.carousel__slide--slide-in-reverse {
+  animation: carousel-slide-in-reverse $SLIDE_TRANSITION_TIME both ease-in-out;
+}
 
 @keyframes tagline-1-slide-in {
   0% { 

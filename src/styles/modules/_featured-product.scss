@@ -52,7 +52,6 @@
 
   &__rondel {
     font-size: 50px;
-    //font-weight: 100;
     font-family: $FONT_ALT;
     letter-spacing: -2px;
     background: #4b82c2;
@@ -117,6 +116,7 @@
     align-items: flex-start;
     margin: 20px 0;
     flex-direction: column;
+    position: relative;
     @include medium {
       flex-direction: row;
       margin-top: 30px;
@@ -127,7 +127,7 @@
     width: 108px;
     height: 72px;
     border: 3px solid #322e2e;
-    background: transparent;
+    background: $TEXT_LIGHT;
     margin-right: 40px;
     display: flex;
     justify-content: center;
@@ -138,8 +138,9 @@
     font-size: 16px;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: background-color $TRANSITION;
+    transition: background-color $TRANSITION, opacity 1s;
     outline: none;
+    opacity: 1;
     order: 2;
     &:hover {
       background-color: rgba($TEXT_LIGHT_ACCENT, .4);
@@ -197,5 +198,28 @@
       font-size: 16px;
     }
   }
+}
 
+.add-to-cart-button-clone {
+  position: absolute;
+}
+
+.add-to-cart-button-clone + .featured-product__add {
+  opacity: 0;
+  transition: opacity .1s;
+}
+
+@keyframes add-to-cart {
+  0% { 
+    transform: translate(0, 0) scale(1,1);
+    opacity: 1;
+  }
+  100% { 
+    transform: translate(100px, -300px) scale(0.2,0.2); 
+    opacity: 0;
+  }
+}
+
+.add-to-cart-button-clone {
+  animation: add-to-cart .5s both ease-in-out;
 }

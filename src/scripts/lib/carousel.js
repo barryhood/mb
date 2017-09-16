@@ -1,5 +1,6 @@
 import { carouselNav } from '../templates/carousel-nav';
 import { scroller } from './scroller';
+import { getElemIndex } from './get-elem-index';
 
 class Carousel { 
   constructor(e) {
@@ -15,11 +16,14 @@ class Carousel {
     this.isAnimating = false;
     this.currentSlide = this.slides[0];
     this.nextSlide = this.slides[1];
+    this.direction = 'l';
     this.inc = 0;
     this.className = {
       current: 'carousel__slide--current',
       slideout: 'carousel__slide--slide-out',
       slidein: 'carousel__slide--slide-in',
+      slideoutreverse: 'carousel__slide--slide-out-reverse',
+      slideinreverse: 'carousel__slide--slide-in-reverse',
       btnactive: 'carousel__nav-item--active'
     };
     this.init();
@@ -44,6 +48,21 @@ class Carousel {
     const btnHtml = carouselNav(arr);
 
     this.carousel.insertAdjacentHTML('beforeend', btnHtml);
+  }
+
+  scrollPast() {
+    scroller(this.carousel);
+  }
+
+
+  carouselEvents() {
+    this.carousel.addEventListener('mouseenter', (e) => {
+      this.pauseTimer();
+    });
+    this.carousel.addEventListener('mouseleave', (e) => {
+      this.startTimer();
+    });
+
     this.btns = this.carousel.querySelectorAll('.carousel__nav-item');
     this.btnsArr = Array.from(this.btns);
 
@@ -60,21 +79,6 @@ class Carousel {
     this.carousel.querySelector('[data-carousel-scroll]').addEventListener('click', (e) => {
       e.preventDefault();
       this.scrollPast();
-    });
-  }
-
-
-  scrollPast() {
-    scroller(this.carousel);
-  }
-
-
-  carouselEvents() {
-    this.carousel.addEventListener('mouseenter', (e) => {
-      this.pauseTimer();
-    });
-    this.carousel.addEventListener('mouseleave', (e) => {
-      this.startTimer();
     });
   }
 
@@ -107,9 +111,10 @@ class Carousel {
         btn.classList.remove(this.className.btnactive);
       }
     });
+
     this.setAsAnimating();
-    this.currentSlide.classList.add('carousel__slide--slide-out');
-    this.nextSlide.classList.add('carousel__slide--slide-in');
+    this.currentSlide.classList.add(this.direction === 'l' ? this.className.slideout : this.className.slideoutreverse);
+    this.nextSlide.classList.add(this.direction === 'l' ? this.className.slidein : this.className.slideinreverse);
     const transHandler = function() {
       _this.nextSlide.removeEventListener('animationend', transHandler, true );
       _this.setCurrentSlide(_this.nextSlide);
@@ -125,10 +130,8 @@ class Carousel {
   setNextSlide(el = null) {
     if(el !== null) {
       this.nextSlide  = el;
+      this.direction = getElemIndex(this.nextSlide) < getElemIndex(this.currentSlide) ? 'r' : 'l';
     } else {
-      // ideally if the user clicks the button control for a previous slide it would be nice to have a left to right animation
-      // rather than right to left - with a little more time here is where we'd handle the logic for that and perhaps set a property
-      // on Carousel to determine direction of animation
       this.nextSlide = this.currentSlide.nextElementSibling !== null ? this.currentSlide.nextElementSibling : this.slides[0];
     }
   }
@@ -155,11 +158,12 @@ class Carousel {
 
 
   slideCleanup() {
-    const r = [this.className.slideout, this.className.slidein];
+    const r = [this.className.slideout, this.className.slidein,this.className.slideoutreverse, this.className.slideinreverse];
     const slides = Array.from(this.slides);
     slides.forEach((slide) => {
       r.forEach((c) => slide.classList.remove(c));
     });
+    this.direction = 'l';
   }
 
   static create(e) {

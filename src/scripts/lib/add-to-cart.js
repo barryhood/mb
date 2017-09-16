@@ -4,6 +4,7 @@ class AddToCart extends Cart {
   constructor(props) {
     super(props);
     this.btns = document.querySelectorAll('[data-product-add]');
+    this.adding = false;
     this.createAddProductEvents();
   }
 
@@ -15,9 +16,26 @@ class AddToCart extends Cart {
         // use attributes method to grab all element's attributes and run them through a method to return just the relevant ones
         // (just so we don't end up storing class names etc against our product)
         const attr = this.cleanAttributes(btn.attributes);
+        if(this.adding === true) return;
+        this.adding = true;
+        this.animBtn(btn);
         this.addProduct(attr);
       });
     });
+  }
+
+  // adding some animation styling to the add button to make it obvious to the user that something happened on click
+  animBtn(btn) {
+    const _this = this;
+    const btnCopy = btn.cloneNode(true);
+    btnCopy.classList.add('add-to-cart-button-clone');
+    btn.insertAdjacentElement('beforebegin', btnCopy);
+    const transHandler = function() {
+      btnCopy.removeEventListener('animationend', transHandler, true );
+      btnCopy.parentNode.removeChild(btnCopy);
+      _this.adding = false;
+    };
+    btnCopy.addEventListener('animationend', transHandler, true );
   }
 
   // accepts a NamedNodeMap of element attributes, extract the values we need and return
