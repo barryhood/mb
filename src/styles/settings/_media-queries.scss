@@ -1,0 +1,59 @@
+
+
+//Default values
+$MEDIUM_MIN: 860px !default;
+$LARGE_MIN: 1120px !default;
+$XLARGE_MIN: 1480px !default;
+$MEDIA: 'screen' !default;
+
+// Max breakpoint values
+$SMALL_MAX: strip-units($MEDIUM_MIN)-1+'px';
+$MEDIUM_MAX: strip-units($LARGE_MIN)-1+'px';
+$LARGE_MAX: strip-units($XLARGE_MIN)-1+'px';
+$MEDIA: 'screen' !default;
+
+$MEDIA_SMALL_ONLY: "#{$MEDIA} and (max-width: #{$SMALL_MAX})";
+$MEDIA_MEDIUM: "#{$MEDIA} and (min-width: #{$MEDIUM_MIN})";
+$MEDIA_MEDIUM_ONLY: "#{$MEDIA} and (min-width: #{$MEDIUM_MIN}) and (max-width: #{$MEDIUM_MAX})";
+$MEDIA_SMALL_MEDIUM_ONLY: "#{$MEDIA} and (max-width: #{$MEDIUM_MAX})";
+$MEDIA_LARGE: "#{$MEDIA} and (min-width: #{$LARGE_MIN})";
+$MEDIA_LARGE_ONLY: "#{$MEDIA} and (min-width: #{$LARGE_MIN}) and (max-width: #{$LARGE_MAX})";
+$MEDIA_XLARGE: "#{$MEDIA} and (min-width: #{$XLARGE_MIN})";
+
+@mixin smallOnly() {
+  @media #{$MEDIA_SMALL_ONLY} {
+    @content;
+  }
+};
+
+@mixin medium() {
+  @media #{$MEDIA_MEDIUM} {
+      @content;
+  }
+};
+@mixin mediumOnly() {
+  @media #{$MEDIA_MEDIUM_ONLY} {
+      @content;
+  }
+};
+@mixin smallMediumOnly() {
+  @media #{$MEDIA_SMALL_MEDIUM_ONLY} {
+      @content;
+  }
+};
+@mixin large() {
+  @media #{$MEDIA_LARGE} {
+    @content;
+  }
+};
+@mixin largeOnly() {
+  @media #{$MEDIA_LARGE_ONLY} {
+    @content;
+  }
+};
+@mixin xlarge() {
+  @media #{$MEDIA_XLARGE} {
+    @content;
+  }
+};
+

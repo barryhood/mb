@@ -1,0 +1,33 @@
+/* Variables */
+
+$SITE_MAX_WIDTH: 1480px;
+$SITE_PAD_SIDE: 15px;
+//$SITE_PAD_SIDE_WIDE: 20px;
+
+/* Colours */
+
+$TEXT_LIGHT: white;
+$TEXT_LIGHT_ACCENT: #5b5858;
+$TEXT_DARK: black;
+
+$MAIN_BG_COLOR: #f5f1f1;
+$FOOTER_BG_COLOR: #322e2e;
+
+/* Fonts */
+
+$FONT: 'Roboto', sans-serif;
+$FONT_ALT: 'Roboto Slab', serif;
+
+/* Paths */
+
+
+/* Z-INDEX */
+
+$ZINDEX_HEADER: 999;
+
+
+/* Animation/transition */
+
+$EASE: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+$DURATION: 0.35s;
+$TRANSITION: $EASE $DURATION;

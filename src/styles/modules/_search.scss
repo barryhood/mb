@@ -1,0 +1,95 @@
+.search {
+  position: relative;
+  &__label {
+    display: inline-block;
+    font-size: 0;
+    display: inline-block;
+    width: 34px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 10px;
+    opacity: 1;
+    transition: opacity $TRANSITION;
+    position: relative;
+    z-index: 2;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-size: 20px 20px;
+      top: -16px;
+      left: 0;
+      background-repeat: no-repeat;
+    }
+    @include medium {
+      margin-left: 20px;
+      &:before {
+        width: 31px;
+        height: 32px;
+        background-size: auto auto;
+        top: -20px;
+      }
+    }
+  }
+  &__text {
+    line-height: 28px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-bottom: 2px solid $TEXT_LIGHT_ACCENT;
+    outline: none;
+    transform: scale(0,1);
+    transform-origin: left 50%;
+    opacity: 0;
+    transition: all $TRANSITION;
+    font-size: 16px;
+    color: $TEXT_LIGHT;
+    max-width: 120px;
+    @include medium {
+      max-width: 240px;
+    }
+    @include placeholder {
+      color: rgba($TEXT_LIGHT, 0.7);
+    }
+    &:focus {
+      transform: scale(1,1);
+      opacity: 1;
+    }
+  }
+  &__input {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    width: 24px;
+    height: 30px;
+    border: none;
+    opacity: 0;
+    z-index: 1;
+    @include medium {
+      left: 20px;
+      width: 31px;
+      height: 33px;
+    }
+  }
+}
+
+@keyframes search-input-focus {
+  0% { z-index: 1; }
+  100% { z-index: 3; }
+}
+@keyframes search-input {
+  0% { z-index: 3; }
+  100% { z-index: 1; }
+}
+
+.search__input {
+  animation: search-input .5s both ease-in-out;
+}
+.search__text:focus + .search__input {
+  animation: search-input-focus .5s both ease-in-out;
+}

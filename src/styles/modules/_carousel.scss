@@ -1,0 +1,303 @@
+$SLIDE_HEIGHT_SMALL: 400px;
+$SLIDE_HEIGHT_LARGE: 895px;
+$SLIDE_TRANSITION_TIME: 1s;
+
+.carousel {
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__slides {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    height: $SLIDE_HEIGHT_SMALL;
+    @include medium {
+      height: $SLIDE_HEIGHT_LARGE;
+    }
+  }
+
+  &__slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    height: $SLIDE_HEIGHT_SMALL;
+    display: none;
+    @include medium {
+      height: $SLIDE_HEIGHT_LARGE;
+    }
+  }
+
+  &:not(.carousel--js) .carousel__slide:first-child {
+    display: block;
+  }
+
+  &__image {
+    position: absolute;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    max-width: 1980px;
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    span {
+      display: block;
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 0;
+    display: flex;
+    @include medium {
+      bottom: 80px;
+      right: 20px;
+    }
+    @include large {
+      bottom: 80px;
+      right: 0px;
+    }
+  }
+
+  &__nav-item {
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    border: none;
+    margin: 0 2px;
+    padding: 0;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    &:after {
+      content: "";
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 10px;
+      background: white;
+      border: 3px solid white;
+      //box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 3px 3px;
+      transition: all $TRANSITION;
+    }
+    &--active {
+      &:after {
+        width: 12px;
+        height: 12px;
+        border: 3px solid white;
+        background: transparent !important;
+      }
+    }
+  }
+
+  &__tagline {
+    font-family: $FONT;
+    text-align: center;
+    font-size: 24px;
+    line-height: 28px;
+    color: $TEXT_LIGHT;
+    text-shadow: 0px 0px 15px rgba(0, 0, 0, .5);
+    opacity: 0;
+    transition: all $EASE 0.5s;
+    white-space: nowrap;
+    font-weight: 100;    
+    /* 
+    although it's not in the design, added a slight text-shadow to the taglines to account for display on lighter images
+    alternative would of course be a toggle control to change text colour */
+    &--1 {
+      text-align: left;
+      margin-left: -10%;
+    }
+    &--2 {
+     text-align: center; 
+    }
+    &--3 {
+      font-size: 36px;
+      font-weight: 100;
+      line-height: 36px;
+      margin-right: -10%;
+    }
+
+    @include medium {
+      font-size: 40px;
+      line-height: 42px;
+      &--3 {
+        font-size: 60px;
+        line-height: 56px;        
+        margin-right: -10%;
+      }
+    }
+
+    @include large {
+      font-size: 60px;
+      line-height: 62px;
+      &--1 {
+        margin-left: -20%;
+      }
+      &--3 {
+        font-size: 100px;
+        line-height: 96px;        
+        margin-right: -10%;
+      }
+    }
+
+  }
+
+  &__scroll {
+    width: 50px;
+    height: 20px;
+    background: transparent;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -25px;
+    font-size: 0;
+    text-indent: -9999px;
+    position: absolute;
+    z-index: 3;
+    border: none;
+    cursor: pointer;
+    transition: all $TRANSITION;
+    outline: none;
+    &:before, &:after {
+      content: "";
+      width: 26px;
+      height: 3px;
+      background: $TEXT_LIGHT;
+      display: block;
+      position: absolute;
+      bottom: 10px;
+      left: calc(50% - 23px);
+      transform: rotate(35deg);
+    }
+    &:after {
+      left: auto;
+      right: calc(50% - 23px);  
+      transform: rotate(-35deg);
+    }
+    &:hover {
+      opacity: 0.6;
+    }
+
+
+    @include medium {
+      bottom: 80px;
+      right: 20px;
+    }
+    @include large {
+      bottom: 80px;
+      right: 0px;
+    }
+
+
+
+  }
+
+}
+
+/*
+  Animation styles - I've broken these out to make them a bit easier to read/understand
+  Although these are set to slide, since they're using keyframe animation it's much simpler 
+  to change to an alternative transition (such as fade)
+*/
+
+@keyframes carousel-slide-out {
+  0% { transform: translateX(0%);  }
+  100% { transform: translateX(-100%); }
+}
+@keyframes carousel-slide-in {
+  0% { transform: translateX(100%);  }
+  100% { transform: translateX(0%); }
+}
+
+.carousel__slide--current,
+.carousel__slide--slide-out,
+.carousel__slide--slide-in {
+  display: block;
+}
+
+.carousel__slide--slide-out {
+  animation: carousel-slide-out $SLIDE_TRANSITION_TIME both ease-in-out;
+}
+
+.carousel__slide--slide-in {
+  animation: carousel-slide-in $SLIDE_TRANSITION_TIME both ease-in-out;
+}
+
+
+@keyframes tagline-1-slide-in {
+  0% { 
+    transform: translateX(-30%);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  33% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes tagline-2-slide-in {
+  0% { 
+    transform: translateX(30%);
+    opacity: 0;
+    filter: blur(15px);
+  }
+  66% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes tagline-3-slide-in {
+  0% { 
+    transform: translateX(-30%);
+    opacity: 0;
+    filter: blur(20px);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+.carousel__slide--current .carousel__tagline {
+  &--1 {
+    animation: tagline-1-slide-in 2s both ease-in;
+  }
+  &--2 {
+    animation: tagline-2-slide-in 2s both ease-in;
+  }
+  &--3 {
+    animation: tagline-3-slide-in 2s both ease-in;
+  }
+}

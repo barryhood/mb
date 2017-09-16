@@ -1,0 +1,14 @@
+.wrap {
+  padding-left: $SITE_PAD_SIDE;
+  padding-right: $SITE_PAD_SIDE;
+  max-width: $SITE_MAX_WIDTH;
+  margin: 0 auto;
+  @include medium {
+    //padding-left: $SITE_PAD_SIDE_WIDE;
+    //padding-right: $SITE_PAD_SIDE_WIDE;
+  }
+  &--no-pad-side {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

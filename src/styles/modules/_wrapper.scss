@@ -1,0 +1,9 @@
+.wrapper {
+  will-change: transform;
+  transform: translateX(0);
+  position: relative;
+  transition: transform $TRANSITION;
+  .nav--open & {
+    transform: translateX(320px);
+  }
+}

@@ -1,0 +1,201 @@
+.featured-product {
+  padding: 30px 0 40px;
+  text-align: center;
+  @include medium {
+    padding: 50px 0 60px;
+  }
+  &__tagline {
+    font-family: $FONT_ALT;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 30px 15px;
+    border-bottom: 3px solid rgba($TEXT_LIGHT_ACCENT, .3);
+    margin: 0 auto 35px;
+    display: inline-block;
+  }
+
+  &__product {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    @include medium {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__image {
+    display: flex;
+    justify-content: flex-end;
+    img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    @include medium {
+      width: 60%;
+    }
+  }
+
+  &__image-inner {
+    max-width: 620px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include medium {
+      margin-right: 50px;
+    }
+  }
+
+  &__rondel {
+    font-size: 50px;
+    //font-weight: 100;
+    font-family: $FONT_ALT;
+    letter-spacing: -2px;
+    background: #4b82c2;
+    border-radius: 100px;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $TEXT_LIGHT;
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    @include medium {
+      top: calc(50% - 52px);
+      right: auto;
+      left: calc(50% + 118px);
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__rondel-currency {
+    font-size: 30px;
+    letter-spacing: 0;
+    margin-top: -26px;
+    font-weight: 300;
+  }
+
+  &__rondel-decimal {
+    font-size: 30px;
+    margin-bottom: -14px;
+    font-weight: 300;
+  }
+
+  &__description {
+    display: flex;
+    @include medium {
+      width: 40%;
+    }
+  }
+  &__description-inner {
+    max-width: 460px;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 100;
+    line-height: 1.2em;
+    @include medium {
+      font-size: 60px;
+    }
+  }
+
+  &__para {
+    line-height: 1.5em;
+  }
+
+  &__options {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    margin: 20px 0;
+    flex-direction: column;
+    @include medium {
+      flex-direction: row;
+      margin-top: 30px;
+    }
+  }
+
+  &__add {
+    width: 108px;
+    height: 72px;
+    border: 3px solid #322e2e;
+    background: transparent;
+    margin-right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $FONT_ALT;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color $TRANSITION;
+    outline: none;
+    order: 2;
+    &:hover {
+      background-color: rgba($TEXT_LIGHT_ACCENT, .4);
+    }
+    img {
+      width: auto;
+      height: auto;
+      margin-left: 10px;
+    }
+    @include medium {
+      order: initial;
+    }
+  }
+
+  &__tags-wrapper {
+    display: flex;
+    margin-bottom: 10px;
+    @include medium {
+      display: block;
+      margin-bottom: 0;
+    }
+  }
+
+  &__tags-label {
+    font-family: $FONT_ALT;
+    font-size: 16px;
+    margin: 5px 10px 8px 0;
+    @include medium {
+      margin-right: 0;
+    }
+  }
+
+  &__tags {
+    font-size: 0;
+  }
+
+  &__tag {
+    font-family: $FONT_ALT;
+    font-size: 14px;
+    font-weight: bold;
+    color: $TEXT_DARK;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 5px 8px;
+    background-color: #bbb7b7;
+    border-radius: 2px;
+    margin-right: 14px;
+    margin-bottom: 5px;
+    transition: all $TRANSITION;
+    &:hover {
+      background-color: $TEXT_DARK;
+      color: #bbb7b7;
+    }
+    @include medium {
+      font-size: 16px;
+    }
+  }
+
+}
