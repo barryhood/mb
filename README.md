@@ -55,6 +55,7 @@ npm run build
 * Elements of the carousel which make sense to be split out into their own components (such as ES6 Templates, to avoid littering the code with HTML syntax, or the scroll functionality, which could potentially be utilised by other components on the page) have been included as imports.
 * The images are inline <img> elements using some CSS trickery to emulate background images. My reasoning here is that I’ve built a lot of these and at some point the client almost always wants to add text to the image (for special offers, etc), so semantically img works better (purely decorational images can always have empty alt attributes).
 * The images make use of figure/figcaption, again better for semantics.
+* I have added a couple of images to srcset to demonstrate serving up responsive images - these aren’t necessarily the breakpoints I would normally use and the images haven’t been optimised too well, it’s just to demonstrate the principle.
 * I’ve added a keyframe animation to the text to make it stand out a little (obviously a designer could make this look much better but the brief included adding some animation).
 * I’m not sure what the exact functionality of the arrow is meant to be, but my assumption is to scroll past the carousel to the next block of content, so this is how I’ve implemented it. It uses scroll behaviour, as this should ensure the best browser-based scroll experience in browsers which support it, while falling back on a JavaScript polyfill implementation for those that don’t.
 
